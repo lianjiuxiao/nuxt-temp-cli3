@@ -1,6 +1,6 @@
 # nuxt-temp-v3
 
-> My incredible Nuxt.js project
+> My glorious Nuxt.js project
 
 ## Build Setup
 

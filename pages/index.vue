@@ -6,7 +6,7 @@
         nuxt-temp-v3
       </h1>
       <h2 class="subtitle">
-        My incredible Nuxt.js project
+        My glorious Nuxt.js project
       </h2>
       <div class="links">
         <a
