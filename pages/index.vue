@@ -26,13 +26,44 @@
 
 <script>
   import Logo from '~/components/Logo.vue'
+  import {mapState, mapMutations, mapActions, mapGetters} from 'vuex';
 
   export default {
     components: {
       Logo
     },
+    computed: {
+      ...mapGetters('ModuleUser', ['user']),
+      ...mapState({
+        userWx: state => state.ModuleUser.wx
+      })
+    },
     mounted() {
-      console.log(this.hasValue("11111111"))
+      console.log(this.user)
+      console.log(this.userWx)
+      this.$mock({
+        url: "/city",
+        method: 'get',
+        headers: {token2: "123456"}
+      }).then(res => {
+      })
+      this.$axios({
+        url: "/login",
+        params: {username: 'lisanxing', userpwd: '123456'},
+        method: 'get',
+        headers: {token2: "45678"},
+        auth: {token2: "123456"}
+      }).then(res => {
+      })
+      this.$cross({
+        url: "https://www.easy-mock.com/mock/5bf50d687392ed1f6bff6f1b/mock-vue/city",
+        method: 'get',
+        // headers: {token2: "123456"}
+      }).then(res => {
+      })
+      this.appReady(() => {
+
+      })
     }
   }
 </script>

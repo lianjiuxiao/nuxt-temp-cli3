@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import {mapGetters, mapMutations, mapActions} from 'vuex'
 import {merge, hasValue} from '@/common/utils/utils'
+import {$axios, $mock, $cross} from '@/network/base/axios'
 
 Vue.mixin({
   components: {},
@@ -8,8 +9,9 @@ Vue.mixin({
   data() {
     return {}
   },
+
   computed: {
-    ...mapGetters(['user'])
+    // ...mapGetters(['user'])
   },
   watch: {},
   created() {
@@ -20,6 +22,8 @@ Vue.mixin({
   activited() {
   },
   update() {
+  },
+  destroyed() {
   },
   methods: {
     hasValue(val) {
@@ -52,13 +56,11 @@ Vue.mixin({
       });
       !!cb && cb()
     },
-    ...mapMutations(['setUser']),
-    ...mapActions(['alert', 'wait', 'confirm'])
+    ...mapMutations('ModuleUser', ['setUser']),
+    // ...mapActions(['alert', 'wait', 'confirm'])
   },
   filter: {},
 });
-/*
 Vue.prototype.$axios = $axios
 Vue.prototype.$mock = $mock
 Vue.prototype.$cross = $cross
-*/

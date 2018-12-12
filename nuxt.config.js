@@ -1,5 +1,17 @@
 const pkg = require('./package')
-
+const domains = {
+  production: (() => {
+    // return  'http://192.168.4.52:9127',
+    return 'http://hb.chelenet.com'
+  })(),
+  test: (() => {
+    return 'http://192.168.4.52:9127' // 北京52服务器地址
+  })(),
+  local: (() => {
+    return 'http://192.168.4.52:9127' // 北京52服务器地址
+  })(),
+  mock: 'https://www.easy-mock.com/mock/5bf50d687392ed1f6bff6f1b/mock-vue'// easyMock 网站提供的模拟地址,
+}
 module.exports = {
   mode: 'universal',
 
@@ -39,9 +51,10 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modulesu: [
+  modules: [
     //     // Doc: https://github.com/nuxt-community/axios-module#sage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
@@ -50,6 +63,23 @@ module.exports = {
     // See https://github.com/nuxt-community/axios-module#options
   },
 
+  proxy: {
+    '/api': {
+      target: domains.production,  //目标接口域名
+      changeOrigin: true,  //是否跨域
+      pathRewrite: {
+        '^/api': ''   //重写接口
+      }
+    },
+    '/mock': {
+      target: domains.mock,  //目标接口域名
+      changeOrigin: true,  //是否跨域
+      secure: false,
+      pathRewrite: {
+        '^/mock': ''
+      }
+    }
+  },
   /*
   ** Build configuration
   */
@@ -57,6 +87,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
+    vendor: ['axios'],
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

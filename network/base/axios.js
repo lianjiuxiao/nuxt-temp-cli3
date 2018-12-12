@@ -16,7 +16,7 @@ const mockUrl = (url) => {
 
 
 const _axios = (options) => {
-  console.log(arguments);
+  // console.log(arguments);
   let _options = Object.assign({
     method: 'post',
     withCredentials: true
