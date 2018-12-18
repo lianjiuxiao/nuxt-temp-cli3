@@ -27,6 +27,7 @@
 <script>
   import Logo from '~/components/Logo.vue'
   import {mapState, mapMutations, mapActions, mapGetters} from 'vuex';
+  import {getUserInfo} from '~/network/pageNetWork'
 
   export default {
     components: {
@@ -39,8 +40,8 @@
       })
     },
     mounted() {
-      console.log(this.user)
-      console.log(this.userWx)
+      // console.log(this.user)
+      // console.log(this.userWx)
       this.$mock({
         url: "/city",
         method: 'get',
@@ -63,6 +64,13 @@
       })
       this.appReady(() => {
 
+      })
+      const option = {
+        token: '1111111'
+      }
+      getUserInfo(option).then(res => {
+        console.log("res>>>>>>>");
+        console.log(res);
       })
     }
   }
