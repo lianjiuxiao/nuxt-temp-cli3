@@ -1,14 +1,11 @@
 const pkg = require('./package')
 const domains = {
   production: (() => {
-    // return  'http://192.168.4.52:9127',
-    return 'http://hb.chelenet.com'
-  })(),
-  test: (() => {
-    return 'http://192.168.4.52:9127' // 北京52服务器地址
-  })(),
-  local: (() => {
-    return 'http://192.168.4.52:9127' // 北京52服务器地址
+    if (process.env.NODE_ENV !== 'production') {
+      return 'https://www.easy-mock.com/mock/5bf50d687392ed1f6bff6f1b/mock-vue'
+    } else {
+      return 'http://192.168.4.52:9127' // 北京52服务器地址
+    }
   })(),
   mock: 'https://www.easy-mock.com/mock/5bf50d687392ed1f6bff6f1b/mock-vue'// easyMock 网站提供的模拟地址,
 }
@@ -67,6 +64,9 @@ module.exports = {
     '/webUser': {
       target: domains.production,  //目标接口域名
       changeOrigin: true,  //是否跨域
+      pathRewrite: {
+        '^/webUser': ''
+      }
     },
     '/mock': {
       target: domains.mock,  //目标接口域名
