@@ -17,7 +17,7 @@ class MockApi extends BaseApi {
   @get('/city')
   async getCity(option) {
     return await this.$ajax(option).then(res => {
-      res.data.form = "拦截并请求easy-mock"
+      res.form = "拦截并请求easy-mock"
       return res
     })
   }
