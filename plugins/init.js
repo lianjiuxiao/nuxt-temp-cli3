@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import {mapGetters, mapMutations, mapActions} from 'vuex'
 import {merge, hasValue} from '@/common/utils/utils'
-import {$axios, $mock, $cross} from '@/network/base/axios'
+import {$axios} from '@/network/base/axios'
+import mock from '@/network/mockNetWork'
 
 Vue.mixin({
   components: {},
@@ -62,5 +63,6 @@ Vue.mixin({
   filter: {},
 });
 Vue.prototype.$axios = $axios
-Vue.prototype.$mock = $mock
-Vue.prototype.$cross = $cross
+if (process.env.NODE_ENV !== 'production') {
+  Vue.use(mock)
+}

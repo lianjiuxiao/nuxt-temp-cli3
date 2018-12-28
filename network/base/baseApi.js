@@ -1,4 +1,4 @@
-import {$axios, $mock, $cross} from "./axios";
+import {$axios} from "./axios";
 import {symbolContext} from "./decorator";
 
 export class BaseApi {
@@ -12,5 +12,16 @@ export class BaseApi {
   context(target) {
     target.prototype[symbolContext] = this
   }
+
+  before() {
+
+  }
+
+  async $ajax(option = {}) {
+    this.before(option);
+    const res = await $axios(option)
+    return res.data
+  }
 }
 
+export default new BaseApi()

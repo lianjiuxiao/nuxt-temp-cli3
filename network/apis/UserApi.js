@@ -1,5 +1,6 @@
 import {BaseApi} from '../base/baseApi'
-import {controller, http} from "../base/decorator";
+import axios from 'axios'
+import {controller, get, post} from "../base/decorator";
 
 @controller('/webUser')
 class UserApi extends BaseApi {
@@ -11,11 +12,19 @@ class UserApi extends BaseApi {
 
   }
 
-  @http('/getUserInfo')
+  @get('/city')
+  async getCity(option) {
+    return await this.$ajax(option)
+  }
+
+  @get('/userInfo')
   async getUserInfo(option) {
-    console.log('option>>>>>>>>>>>');
-    console.log(option);
-    return await Object.assign(option, {name: 'listener'})
+    return await this.$ajax(option)
+  }
+
+  @post('/getTableData')
+  async getTableData(option) {
+    return await this.$ajax(option)
   }
 }
 

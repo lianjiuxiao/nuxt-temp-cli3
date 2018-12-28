@@ -10,13 +10,27 @@ export function controller(path = '') {
   }
 }
 
-export function http(path = '') {
+export function get(path = '') {
   return function (target, key, descriptor) {
     let method = descriptor.value;
     descriptor.value = async (arg) => {
       arg = Object.assign(arg, {
+        method: 'get',
         url: `${target[symbolPrefix]}${path}`
-      })
+      });
+      return await method.call(target[symbolContext], arg)
+    }
+  }
+}
+
+export function post(path = '') {
+  return function (target, key, descriptor) {
+    let method = descriptor.value;
+    descriptor.value = async (arg) => {
+      arg = Object.assign(arg, {
+        method: 'post',
+        url: `${target[symbolPrefix]}${path}`
+      });
       return await method.call(target[symbolContext], arg)
     }
   }

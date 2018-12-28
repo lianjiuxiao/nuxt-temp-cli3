@@ -64,12 +64,9 @@ module.exports = {
   },
 
   proxy: {
-    '/api': {
+    '/webUser': {
       target: domains.production,  //目标接口域名
       changeOrigin: true,  //是否跨域
-      pathRewrite: {
-        '^/api': ''   //重写接口
-      }
     },
     '/mock': {
       target: domains.mock,  //目标接口域名
@@ -84,13 +81,13 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    loaders:[
+    loaders: [
       {
-        test:/\.(png|jpe?g|gif|svg)$/,
-        loader:"url-loader",
-        query:{
-          limit:10000,
-          name:'img/[name].[hash].[ext]'
+        test: /\.(png|jpe?g|gif|svg)$/,
+        loader: "url-loader",
+        query: {
+          limit: 10000,
+          name: 'img/[name].[hash].[ext]'
         }
       }
     ],
